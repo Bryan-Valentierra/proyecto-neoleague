@@ -322,4 +322,24 @@ public class PanelRegistroJugador extends JPanel {
         campoHistorialCompetitivo.setText("");
         campoAnalisisJuegos.setText("");
     }
+    
+     public java.util.List<JTextField> getCamposModificarJugador() {
+        java.util.List<JTextField> campos = new java.util.ArrayList<>();
+        campos.add(campoId);
+        campos.add(campoNombre);
+        campos.add(campoApellido);
+        campos.add(campoFechaNacimiento);
+        campos.add(campoNacionalidad);
+        campos.add(campoCorreo);
+        campos.add(campoJuegosParticipados);
+        campos.add(campoVictorias);
+        campos.add(campoDerrotas);
+        campos.add(campoRecord);
+        campos.add(campoJuegoFavorito);
+        campos.add(campoRolPrincipal);
+        campos.add(campoEstadisticas);
+        campos.add(campoHistorialCompetitivo);
+        campos.add(campoAnalisisJuegos);
+        return campos;
+    }
 }

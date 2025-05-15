@@ -2,155 +2,106 @@ package co.edu.unbosque.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PanelRegistrarTorneo extends JPanel {
 
-    private JLabel labelTitulo;
-    private JLabel labelIdTorneo;
-    private JTextField campoIdTorneo;
-    private JLabel labelNombreTorneo;
-    private JTextField campoNombreTorneo;
-    private JLabel labelFechaInicio;
+    private JLabel etiquetaTitulo;
+    private JLabel etiquetaIdTorneo; // Nuevo
+    private JTextField campoIdTorneo; // Nuevo
+    private JLabel etiquetaNombre;
+    private JTextField campoNombre;
+    private JLabel etiquetaFechaInicio;
     private JTextField campoFechaInicio;
-    private JLabel labelFechaFin;
+    private JLabel etiquetaFechaFin;
     private JTextField campoFechaFin;
-    private JLabel labelReglamento;
-    private JTextArea areaReglamento;
-    private JScrollPane scrollReglamento;
-    private JLabel labelTipoJuego;
+    private JLabel etiquetaReglamento;
+    private JTextField campoReglamento;
+    private JLabel etiquetaTipoJuego;
     private JTextField campoTipoJuego;
-    private JLabel labelMaxEquipos;
+    private JLabel etiquetaMaxEquipos;
     private JSpinner spinnerMaxEquipos;
-
     private JButton botonRegistrar;
+    private JButton botonVolver;
     private JButton botonModificar;
     private JButton botonEliminar;
-    private JButton botonVolver;
-
-    private JLabel mensajeLabel;
+    private JLabel mensajeError;
 
     public PanelRegistrarTorneo() {
-        setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.weightx = 1.0;
+        setLayout(null);
 
-        // Inicializar componentes
-        labelTitulo = new JLabel("Registrar Torneo");
-        labelTitulo.setFont(new Font("Arial", Font.BOLD, 20));
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 2;
-        add(labelTitulo, gbc);
-
-        gbc.gridwidth = 1;
-        gbc.anchor = GridBagConstraints.WEST;
-
-        labelIdTorneo = new JLabel("ID Torneo:");
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        add(labelIdTorneo, gbc);
-        campoIdTorneo = new JTextField(20);
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        add(campoIdTorneo, gbc);
-
-        labelNombreTorneo = new JLabel("Nombre del Torneo:");
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        add(labelNombreTorneo, gbc);
-        campoNombreTorneo = new JTextField(20);
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-        add(campoNombreTorneo, gbc);
-
-        labelFechaInicio = new JLabel("Fecha de Inicio (YYYY-MM-DD):");
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        add(labelFechaInicio, gbc);
+        etiquetaTitulo = new JLabel("Registrar Torneo");
+        etiquetaIdTorneo = new JLabel("ID Torneo:"); // Nuevo
+        campoIdTorneo = new JTextField(20); // Nuevo
+        etiquetaNombre = new JLabel("Nombre:");
+        campoNombre = new JTextField(20);
+        etiquetaFechaInicio = new JLabel("Fecha Inicio:");
         campoFechaInicio = new JTextField(20);
-        gbc.gridx = 1;
-        gbc.gridy = 3;
-        add(campoFechaInicio, gbc);
-
-        labelFechaFin = new JLabel("Fecha de Fin (YYYY-MM-DD):");
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        add(labelFechaFin, gbc);
+        etiquetaFechaFin = new JLabel("Fecha Fin:");
         campoFechaFin = new JTextField(20);
-        gbc.gridx = 1;
-        gbc.gridy = 4;
-        add(campoFechaFin, gbc);
-
-        labelReglamento = new JLabel("Reglamento:");
-        gbc.gridx = 0;
-        gbc.gridy = 5;
-        add(labelReglamento, gbc);
-        // Área de texto reducida en un 30% (de 5 filas a 3.5 filas, redondeado a 3)
-        areaReglamento = new JTextArea(3, 20); // Reducido de 5 a 3 filas
-        scrollReglamento = new JScrollPane(areaReglamento);
-        gbc.gridx = 1;
-        gbc.gridy = 5;
-        gbc.weighty = 1.0; // Permitir que el área de texto crezca verticalmente
-        gbc.fill = GridBagConstraints.BOTH; // Llenar ambas direcciones
-        add(scrollReglamento, gbc);
-        gbc.weighty = 0.0; // Restablecer el peso vertical
-
-        gbc.fill = GridBagConstraints.HORIZONTAL; // Restablecer el fill
-
-        labelTipoJuego = new JLabel("Tipo de Juego:");
-        gbc.gridx = 0;
-        gbc.gridy = 6;
-        add(labelTipoJuego, gbc);
+        etiquetaReglamento = new JLabel("Reglamento:");
+        campoReglamento = new JTextField(20);
+        etiquetaTipoJuego = new JLabel("Tipo de Juego:");
         campoTipoJuego = new JTextField(20);
-        gbc.gridx = 1;
-        gbc.gridy = 6;
-        add(campoTipoJuego, gbc);
+        etiquetaMaxEquipos = new JLabel("Max. Equipos:");
+        spinnerMaxEquipos = new JSpinner(new SpinnerNumberModel(2, 2, 100, 1));
+        botonRegistrar = new JButton("Registrar");
+        botonVolver = new JButton("Volver");
+        botonModificar = new JButton("Modificar");
+        botonEliminar = new JButton("Eliminar");
+        mensajeError = new JLabel("");
+        mensajeError.setForeground(Color.RED);
 
-        labelMaxEquipos = new JLabel("Número Máximo de Equipos:");
-        gbc.gridx = 0;
-        gbc.gridy = 7;
-        add(labelMaxEquipos, gbc);
-        spinnerMaxEquipos = new JSpinner(new SpinnerNumberModel(2, 2, 100, 1)); // Ejemplo de rango
-        gbc.gridx = 1;
-        gbc.gridy = 7;
-        add(spinnerMaxEquipos, gbc);
+        etiquetaTitulo.setBounds(300, 20, 150, 20);
+        etiquetaIdTorneo.setBounds(200, 60, 100, 20); // Nuevo
+        campoIdTorneo.setBounds(310, 60, 200, 25); // Nuevo
+        etiquetaNombre.setBounds(200, 100, 100, 20); // Movido hacia abajo
+        campoNombre.setBounds(310, 100, 200, 25); // Movido hacia abajo
+        etiquetaFechaInicio.setBounds(200, 140, 100, 20); // Movido hacia abajo
+        campoFechaInicio.setBounds(310, 140, 200, 25); // Movido hacia abajo
+        etiquetaFechaFin.setBounds(200, 180, 100, 20); // Movido hacia abajo
+        campoFechaFin.setBounds(310, 180, 200, 25); // Movido hacia abajo
+        etiquetaReglamento.setBounds(200, 220, 100, 20); // Movido hacia abajo
+        campoReglamento.setBounds(310, 220, 200, 25); // Movido hacia abajo
+        etiquetaTipoJuego.setBounds(200, 260, 100, 20); // Movido hacia abajo
+        campoTipoJuego.setBounds(310, 260, 200, 25); // Movido hacia abajo
+        etiquetaMaxEquipos.setBounds(200, 300, 100, 20); // Movido hacia abajo
+        spinnerMaxEquipos.setBounds(310, 300, 80, 25); // Movido hacia abajo
+        botonRegistrar.setBounds(250, 340, 100, 30);
+        botonVolver.setBounds(400, 340, 100, 30);
+        botonModificar.setBounds(250, 380, 100, 30);
+        botonEliminar.setBounds(400, 380, 100, 30);
+        mensajeError.setBounds(250, 420, 300, 20);
 
-        // Botones
-        gbc.gridx = 0;
-        gbc.gridy = 8;
-        gbc.gridwidth = 2;
-        gbc.anchor = GridBagConstraints.CENTER;
-        botonRegistrar = new JButton("Registrar Torneo");
-        add(botonRegistrar, gbc);
-
-        gbc.gridy = 9;
-        botonModificar = new JButton("Modificar Torneo");
-        add(botonModificar, gbc);
-
-        gbc.gridy = 10;
-        botonEliminar = new JButton("Eliminar Torneo");
-        add(botonEliminar, gbc);
-
-        gbc.gridy = 11;
-        botonVolver = new JButton("Volver a Registro");
-        add(botonVolver, gbc);
-
-        mensajeLabel = new JLabel("");
-        mensajeLabel.setForeground(Color.RED);
-        gbc.gridy = 12;
-        add(mensajeLabel, gbc);
+        add(etiquetaTitulo);
+        add(etiquetaIdTorneo); // Nuevo
+        add(campoIdTorneo); // Nuevo
+        add(etiquetaNombre);
+        add(campoNombre);
+        add(etiquetaFechaInicio);
+        add(campoFechaInicio);
+        add(etiquetaFechaFin);
+        add(campoFechaFin);
+        add(etiquetaReglamento);
+        add(campoReglamento);
+        add(etiquetaTipoJuego);
+        add(campoTipoJuego);
+        add(etiquetaMaxEquipos);
+        add(spinnerMaxEquipos);
+        add(botonRegistrar);
+        add(botonVolver);
+        add(botonModificar);
+        add(botonEliminar);
+        add(mensajeError);
     }
 
-    // Getters
-    public JTextField getCampoIdTorneo() {
+    public JTextField getCampoIdTorneo() { // Nuevo
         return campoIdTorneo;
     }
 
-    public JTextField getCampoNombreTorneo() {
-        return campoNombreTorneo;
+    public JTextField getCampoNombre() {
+        return campoNombre;
     }
 
     public JTextField getCampoFechaInicio() {
@@ -161,8 +112,8 @@ public class PanelRegistrarTorneo extends JPanel {
         return campoFechaFin;
     }
 
-    public String getAreaReglamento() {
-        return areaReglamento.getText();
+    public JTextField getCampoReglamento() {
+        return campoReglamento;
     }
 
     public JTextField getCampoTipoJuego() {
@@ -177,6 +128,10 @@ public class PanelRegistrarTorneo extends JPanel {
         return botonRegistrar;
     }
 
+    public JButton getBotonVolver() {
+        return botonVolver;
+    }
+
     public JButton getBotonModificar() {
         return botonModificar;
     }
@@ -185,22 +140,30 @@ public class PanelRegistrarTorneo extends JPanel {
         return botonEliminar;
     }
 
-    public JButton getBotonVolver() {
-        return botonVolver;
+    public void limpiarFormulario() {
+        campoIdTorneo.setText(""); // Nuevo
+        campoNombre.setText("");
+        campoFechaInicio.setText("");
+        campoFechaFin.setText("");
+        campoReglamento.setText("");
+        campoTipoJuego.setText("");
+        spinnerMaxEquipos.setValue(2);
+        mensajeError.setText("");
     }
 
     public void mostrarMensaje(String mensaje) {
-        mensajeLabel.setText(mensaje);
+        mensajeError.setText(mensaje);
     }
 
-    public void limpiarFormulario() {
-        campoIdTorneo.setText("");
-        campoNombreTorneo.setText("");
-        campoFechaInicio.setText("");
-        campoFechaFin.setText("");
-        areaReglamento.setText("");
-        campoTipoJuego.setText("");
-        spinnerMaxEquipos.setValue(2);
-        mensajeLabel.setText("");
+    public List<JTextField> getCamposModificarTorneo() {
+        List<JTextField> campos = new ArrayList<>();
+        campos.add(campoIdTorneo);
+        campos.add(campoNombre);
+        campos.add(campoFechaInicio);
+        campos.add(campoFechaFin);
+        campos.add(campoReglamento);
+        campos.add(campoTipoJuego);
+        campos.add(new JTextField(spinnerMaxEquipos.getValue().toString())); // Convertir valor del spinner a JTextField
+        return campos;
     }
 }

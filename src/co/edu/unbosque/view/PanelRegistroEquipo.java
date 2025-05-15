@@ -2,6 +2,8 @@ package co.edu.unbosque.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PanelRegistroEquipo extends JPanel {
 
@@ -148,11 +150,10 @@ public class PanelRegistroEquipo extends JPanel {
     }
 
     // Getters
-    
-     
-public JButton getBotonRegistrarEquipo() {
-    return botonRegistrar; 
-}
+
+    public JButton getBotonRegistrarEquipo() {
+        return botonRegistrar;
+    }
     public JTextField getCampoIdEquipo() {
         return campoIdEquipo;
     }
@@ -215,5 +216,18 @@ public JButton getBotonRegistrarEquipo() {
         campoPatrocinador.setText("");
         campoSedeEntrenamiento.setText("");
         mensajeLabel.setText("");
+    }
+
+    public List<JTextField> getCamposModificarEquipo() {
+        List<JTextField> campos = new ArrayList<>();
+        campos.add(campoIdEquipo);
+        campos.add(campoNombreEquipo);
+        campos.add(campoFechaCreacion);
+        campos.add(new JTextField(spinnerNumeroJugadores.getValue().toString())); // Convertir valor del spinner a JTextField
+        campos.add(campoEntrenador);
+        campos.add(campoJuegoPrincipal);
+        campos.add(campoPatrocinador);
+        campos.add(campoSedeEntrenamiento);
+        return campos;
     }
 }

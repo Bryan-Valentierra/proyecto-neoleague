@@ -2,8 +2,11 @@ package co.edu.unbosque.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PanelRegistroEntrenador extends JPanel {
+
     private JLabel labelTitulo;
     private JLabel labelId;
     private JTextField campoId;
@@ -23,6 +26,8 @@ public class PanelRegistroEntrenador extends JPanel {
     private JTextField campoEquipoAsignado;
     private JButton botonRegistrarEntrenador;
     private JButton botonVolver;
+    private JButton botonEliminarEntrenador;
+    private JButton botonModificarEntrenador;
     private JLabel mensajeLabel;
 
     public PanelRegistroEntrenador() {
@@ -157,10 +162,22 @@ public class PanelRegistroEntrenador extends JPanel {
         gbc.weighty = 0.0;
         add(botonVolver, gbc);
 
+        // Botón Eliminar Entrenador
+        botonEliminarEntrenador = new JButton("Eliminar Entrenador");
+        gbc.gridy = 11;
+        gbc.weighty = 0.0;
+        add(botonEliminarEntrenador, gbc);
+
+        // Botón Modificar Entrenador
+        botonModificarEntrenador = new JButton("Modificar Entrenador");
+        gbc.gridy = 12;
+        gbc.weighty = 0.0;
+        add(botonModificarEntrenador, gbc);
+
         // Mensaje Label
         mensajeLabel = new JLabel("");
         mensajeLabel.setForeground(Color.RED);
-        gbc.gridy = 11;
+        gbc.gridy = 13;
         gbc.gridwidth = 2;
         gbc.weighty = 1.0; // Empujar hacia abajo
         gbc.anchor = GridBagConstraints.SOUTH;
@@ -168,18 +185,58 @@ public class PanelRegistroEntrenador extends JPanel {
     }
 
     // Getters
-    public JTextField getCampoId() { return campoId; }
-    public JTextField getCampoNombre() { return campoNombre; }
-    public JTextField getCampoApellido() { return campoApellido; }
-    public JTextField getCampoFechaNacimiento() { return campoFechaNacimiento; }
-    public JTextField getCampoNacionalidad() { return campoNacionalidad; }
-    public JTextField getCampoCorreo() { return campoCorreo; }
-    public JTextField getCampoExperiencia() { return campoExperiencia; }
-    public JTextField getCampoEquipoAsignado() { return campoEquipoAsignado; }
-    public JButton getBotonRegistrarEntrenador() { return botonRegistrarEntrenador; }
-    public JButton getBotonVolver() { return botonVolver; }
+    public JTextField getCampoId() {
+        return campoId;
+    }
 
-    public void mostrarMensaje(String mensaje) { mensajeLabel.setText(mensaje); }
+    public JTextField getCampoNombre() {
+        return campoNombre;
+    }
+
+    public JTextField getCampoApellido() {
+        return campoApellido;
+    }
+
+    public JTextField getCampoFechaNacimiento() {
+        return campoFechaNacimiento;
+    }
+
+    public JTextField getCampoNacionalidad() {
+        return campoNacionalidad;
+    }
+
+    public JTextField getCampoCorreo() {
+        return campoCorreo;
+    }
+
+    public JTextField getCampoExperiencia() {
+        return campoExperiencia;
+    }
+
+    public JTextField getCampoEquipoAsignado() {
+        return campoEquipoAsignado;
+    }
+
+    public JButton getBotonRegistrarEntrenador() {
+        return botonRegistrarEntrenador;
+    }
+
+    public JButton getBotonVolver() {
+        return botonVolver;
+    }
+
+    public JButton getBotonEliminarEntrenador() {
+        return botonEliminarEntrenador;
+    }
+
+    public JButton getBotonModificarEntrenador() {
+        return botonModificarEntrenador;
+    }
+
+    public void mostrarMensaje(String mensaje) {
+        mensajeLabel.setText(mensaje);
+    }
+
     public void limpiarFormulario() {
         campoId.setText("");
         campoNombre.setText("");
@@ -189,5 +246,18 @@ public class PanelRegistroEntrenador extends JPanel {
         campoCorreo.setText("");
         campoExperiencia.setText("");
         campoEquipoAsignado.setText("");
+    }
+
+    public List<JTextField> getCamposModificarEntrenador() {
+        List<JTextField> campos = new ArrayList<>();
+        campos.add(campoId);
+        campos.add(campoNombre);
+        campos.add(campoApellido);
+        campos.add(campoFechaNacimiento);
+        campos.add(campoNacionalidad);
+        campos.add(campoCorreo);
+        campos.add(campoExperiencia);
+        campos.add(campoEquipoAsignado);
+        return campos;
     }
 }

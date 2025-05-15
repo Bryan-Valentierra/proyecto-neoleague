@@ -10,6 +10,7 @@ public class PanelPrincipal extends JPanel {
     private JButton botonAnalisis;
     private JButton botonTorneosActivos;
     private JButton botonResultados;
+    private JButton botonDisponibilidadEquipos; // Nuevo botón
     private JLabel etiquetaBienvenida;
 
     private Dimension botonSize = new Dimension(180, 30); // Define el tamaño preferido de los botones
@@ -54,9 +55,15 @@ public class PanelPrincipal extends JPanel {
         botonResultados.setPreferredSize(botonSize);
         gbc.gridy = 4;
         add(botonResultados, gbc);
+
+        // Botón Disponibilidad Equipos
+        botonDisponibilidadEquipos = new JButton("Disponibilidad Equipos");
+        botonDisponibilidadEquipos.setPreferredSize(botonSize);
+        gbc.gridy = 5; // Colocarlo debajo de Resultados
+        add(botonDisponibilidadEquipos, gbc);
     }
 
-   
+
     public JButton getBotonRegistrar() {
         return botonRegistrar;
     }
@@ -73,11 +80,16 @@ public class PanelPrincipal extends JPanel {
         return botonResultados;
     }
 
+    public JButton getBotonDisponibilidadEquipos() {
+        return botonDisponibilidadEquipos;
+    }
+
     // Método para añadir ActionListener a los botones (puede ser llamado desde el Controller)
     public void agregarActionListener(ActionListener listener) {
         botonRegistrar.addActionListener(listener);
         botonAnalisis.addActionListener(listener);
         botonTorneosActivos.addActionListener(listener);
         botonResultados.addActionListener(listener);
+        botonDisponibilidadEquipos.addActionListener(listener);
     }
 }

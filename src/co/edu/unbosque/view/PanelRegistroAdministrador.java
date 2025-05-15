@@ -2,6 +2,8 @@ package co.edu.unbosque.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PanelRegistroAdministrador extends JPanel {
 
@@ -146,5 +148,14 @@ public class PanelRegistroAdministrador extends JPanel {
         campoUsuario.setText("");
         campoContrasena.setText("");
         mensajeLabel.setText("");
+    }
+
+    public List<JTextField> getCamposModificarAdministrador() {
+        List<JTextField> campos = new ArrayList<>();
+        campos.add(campoIdAdministrador);
+        campos.add(campoNombre);
+        campos.add(campoUsuario);
+        campos.add(new JTextField(new String(campoContrasena.getPassword()))); // Obtener la contraseña como String en un JTextField temporal
+        return campos;
     }
 }

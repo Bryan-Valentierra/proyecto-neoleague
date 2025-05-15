@@ -2,6 +2,8 @@ package co.edu.unbosque.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PanelRegistrarEmparejamiento extends JPanel {
 
@@ -211,5 +213,18 @@ public class PanelRegistrarEmparejamiento extends JPanel {
         campoRonda.setText("");
         comboEstado.setSelectedIndex(0);
         mensajeLabel.setText("");
+    }
+
+    public List<JTextField> getCamposModificarEmparejamiento() {
+        List<JTextField> campos = new ArrayList<>();
+        campos.add(campoIdEmparejamiento);
+        campos.add(campoIdEquipo1);
+        campos.add(campoIdEquipo2);
+        campos.add(campoIdTorneo);
+        campos.add(campoFecha);
+        campos.add(campoHora);
+        campos.add(campoRonda);
+        campos.add(new JTextField(comboEstado.getSelectedItem().toString())); // Convertir valor del JComboBox a JTextField
+        return campos;
     }
 }

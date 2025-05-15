@@ -3,6 +3,7 @@ package co.edu.unbosque.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class PanelInicioSesion extends JPanel {
 
@@ -12,69 +13,58 @@ public class PanelInicioSesion extends JPanel {
     private JLabel etiquetaContrasena;
     private JPasswordField campoContrasena;
     private JButton botonIniciarSesion;
-    private JLabel etiquetaInformacionTorneos;
-    private JButton botonTorneosActivos;
-    private JButton botonResultados;
-    private JButton botonPremiaciones;
-    private JLabel etiquetaCalendarios;
     private JLabel etiquetaDisponibilidadEquipos;
     private JLabel etiquetaEmparejamientos;
     private JLabel etiquetaHistoricoPartidas;
+    private JLabel mensajeError;
+    private JComboBox<String> comboBoxFechasTorneos;
+    private JLabel etiquetaFechasTorneos;
 
     public PanelInicioSesion() {
-        // 1. Establecer el LayoutManager del panel
-        setLayout(null); // Usamos null layout para control preciso (puedes cambiarlo)
+        setLayout(null);
 
-        // 2. Inicializar los componentes
-        etiquetaBienvenido = new JLabel("Bienvenido!");
+        etiquetaBienvenido = new JLabel("¡Bienvenido!");
         etiquetaUsuario = new JLabel("Usuario:");
         campoUsuario = new JTextField(20);
         etiquetaContrasena = new JLabel("Contraseña:");
         campoContrasena = new JPasswordField(20);
         botonIniciarSesion = new JButton("Iniciar Sesión");
-        etiquetaInformacionTorneos = new JLabel("Información de Torneos");
-        botonTorneosActivos = new JButton("Torneos Activos");
-        botonResultados = new JButton("Resultados");
-        botonPremiaciones = new JButton("Premiaciones");
-        etiquetaCalendarios = new JLabel("Calendarios");
         etiquetaDisponibilidadEquipos = new JLabel("Disponibilidad Equipos");
         etiquetaEmparejamientos = new JLabel("Emparejamientos");
         etiquetaHistoricoPartidas = new JLabel("Histórico Partidas");
+        mensajeError = new JLabel("");
+        mensajeError.setForeground(Color.RED);
+        etiquetaFechasTorneos = new JLabel("Fechas de Torneos:");
+        comboBoxFechasTorneos = new JComboBox<>();
+        comboBoxFechasTorneos.addItem("No hay torneos registrados");
 
-        // 3. Establecer las posiciones y tamaños de los componentes (¡¡¡SI USAS NULL LAYOUT!!!)
-        etiquetaBienvenido.setBounds(50, 20, 100, 20); // x, y, ancho, alto
+        etiquetaBienvenido.setBounds(50, 20, 100, 20);
         etiquetaUsuario.setBounds(50, 60, 80, 20);
         campoUsuario.setBounds(150, 60, 150, 25);
         etiquetaContrasena.setBounds(50, 100, 80, 20);
         campoContrasena.setBounds(150, 100, 150, 25);
         botonIniciarSesion.setBounds(150, 140, 120, 30);
-        etiquetaInformacionTorneos.setBounds(50, 200, 150, 20);
-        botonTorneosActivos.setBounds(50, 230, 120, 30);
-        botonResultados.setBounds(180, 230, 120, 30);
-        botonPremiaciones.setBounds(310, 230, 120, 30);
-        etiquetaCalendarios.setBounds(50, 280, 100, 20);
-        etiquetaDisponibilidadEquipos.setBounds(50, 310, 150, 20);
-        etiquetaEmparejamientos.setBounds(50, 340, 120, 20);
-        etiquetaHistoricoPartidas.setBounds(50, 370, 120, 20);
+        etiquetaDisponibilidadEquipos.setBounds(50, 190, 150, 20); // Ajuste de posición
+        etiquetaEmparejamientos.setBounds(50, 220, 120, 20); // Ajuste de posición
+        etiquetaHistoricoPartidas.setBounds(50, 250, 120, 20); // Ajuste de posición
+        mensajeError.setBounds(50, 175, 300, 20);
+        etiquetaFechasTorneos.setBounds(50, 280, 120, 20); // Ajuste de posición
+        comboBoxFechasTorneos.setBounds(180, 280, 200, 30); // Ajuste de posición
 
-        // 4. Añadir los componentes al panel
         add(etiquetaBienvenido);
         add(etiquetaUsuario);
         add(campoUsuario);
         add(etiquetaContrasena);
         add(campoContrasena);
         add(botonIniciarSesion);
-        add(etiquetaInformacionTorneos);
-        add(botonTorneosActivos);
-        add(botonResultados);
-        add(botonPremiaciones);
-        add(etiquetaCalendarios);
         add(etiquetaDisponibilidadEquipos);
         add(etiquetaEmparejamientos);
         add(etiquetaHistoricoPartidas);
+        add(mensajeError);
+        add(etiquetaFechasTorneos);
+        add(comboBoxFechasTorneos);
     }
 
-    // Getters para los componentes
     public JTextField getCampoUsuario() {
         return campoUsuario;
     }
@@ -86,4 +76,31 @@ public class PanelInicioSesion extends JPanel {
     public JButton getBotonIniciarSesion() {
         return botonIniciarSesion;
     }
+
+    public void limpiarFormulario() {
+        campoUsuario.setText("");
+        campoContrasena.setText("");
+        mensajeError.setText("");
+    }
+
+    public void mostrarMensaje(String mensaje) {
+        mensajeError.setText(mensaje);
+    }
+
+    public void actualizarComboBoxTorneos(List<String> fechas) {
+        comboBoxFechasTorneos.removeAllItems();
+        if (fechas == null || fechas.isEmpty()) {
+            comboBoxFechasTorneos.addItem("No hay torneos registrados");
+        } else {
+            for (String fecha : fechas) {
+                comboBoxFechasTorneos.addItem(fecha);
+            }
+        }
+    }
+    
+
+
+public JComboBox<String> getComboBoxFechasTorneos() {
+    return comboBoxFechasTorneos;
+}
 }

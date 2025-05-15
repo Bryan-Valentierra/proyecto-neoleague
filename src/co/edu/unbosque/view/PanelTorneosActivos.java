@@ -11,6 +11,7 @@ public class PanelTorneosActivos extends JPanel {
     private DefaultTableModel modeloTabla;
     private JScrollPane scrollTabla;
     private JButton botonVolver;
+    private JButton btnGenerarEmparejamientos;
     private JButton botonVerDetalles;
     private JPanel panelBotones; // Panel para contener los botones
 
@@ -68,6 +69,9 @@ public class PanelTorneosActivos extends JPanel {
     // Métodos getter para los botones (para el Controller)
     public JButton getBotonVolver() {
         return botonVolver;
+    }
+        public JButton getBotonGenerarEmparejamientos() { // Getter para el nuevo botón
+        return btnGenerarEmparejamientos;
     }
 
     public JButton getBotonVerDetalles() {

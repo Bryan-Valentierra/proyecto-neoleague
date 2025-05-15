@@ -9,109 +9,120 @@ public class VentanaPrincipal extends JFrame {
     private PanelInicioSesion panelInicioSesion;
     private PanelPrincipal panelPrincipal;
     private PanelRegistro panelRegistro;
+    private PanelAnalisis panelAnalisis;
+    private PanelTorneosActivos panelTorneosActivos;
+    private PanelResultados panelResultados;
     private PanelRegistroJugador panelRegistroJugador;
     private PanelRegistroEntrenador panelRegistroEntrenador;
     private PanelRegistroEquipo panelRegistroEquipo;
     private PanelRegistroAdministrador panelRegistroAdministrador;
     private PanelRegistrarEmparejamiento panelRegistrarEmparejamiento;
     private PanelRegistrarTorneo panelRegistrarTorneo;
-    private PanelAnalisis panelAnalisis;
-    private PanelTorneosActivos panelTorneosActivos;
-    private PanelResultados panelResultados; // Nuevo panel
-
-    private CardLayout cardLayout; // Layout para cambiar entre paneles
+    private PanelDisponibilidadEquipos panelDisponibilidadEquipos; // Nuevo panel
 
     public VentanaPrincipal() {
-        // 1. Inicializar el CardLayout
-        cardLayout = new CardLayout();
+        setTitle("Gestión de Torneos E-Sports");
+        setSize(800, 600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setLayout(new CardLayout());
 
-        // 2. Establecer el CardLayout como el LayoutManager del contentPane
-        getContentPane().setLayout(cardLayout);
-
-        // 3. Inicializar los paneles
         panelInicioSesion = new PanelInicioSesion();
         panelPrincipal = new PanelPrincipal();
         panelRegistro = new PanelRegistro();
+        panelAnalisis = new PanelAnalisis();
+        panelTorneosActivos = new PanelTorneosActivos();
+        panelResultados = new PanelResultados();
         panelRegistroJugador = new PanelRegistroJugador();
         panelRegistroEntrenador = new PanelRegistroEntrenador();
         panelRegistroEquipo = new PanelRegistroEquipo();
         panelRegistroAdministrador = new PanelRegistroAdministrador();
         panelRegistrarEmparejamiento = new PanelRegistrarEmparejamiento();
         panelRegistrarTorneo = new PanelRegistrarTorneo();
-        panelAnalisis = new PanelAnalisis();
-        panelTorneosActivos = new PanelTorneosActivos();
-        panelResultados = new PanelResultados(); // Inicializar
+        panelDisponibilidadEquipos = new PanelDisponibilidadEquipos(); // Inicializar el nuevo panel
 
-        // 4. Añadir los paneles al contentPane con nombres para el CardLayout
-        getContentPane().add(panelInicioSesion, "InicioSesion");
-        getContentPane().add(panelPrincipal, "Principal");
-        getContentPane().add(panelRegistro, "Registro");
-        getContentPane().add(panelRegistroJugador, "RegistroJugador");
-        getContentPane().add(panelRegistroEntrenador, "RegistroEntrenador");
-        getContentPane().add(panelRegistroEquipo, "RegistroEquipo");
-        getContentPane().add(panelRegistroAdministrador, "RegistroAdministrador");
-        getContentPane().add(panelRegistrarEmparejamiento, "RegistrarEmparejamiento");
-        getContentPane().add(panelRegistrarTorneo, "RegistrarTorneo");
-        getContentPane().add(panelAnalisis, "Analisis");
-        getContentPane().add(panelTorneosActivos, "TorneosActivos");
-        getContentPane().add(panelResultados, "Resultados"); // Añadir
+        add(panelInicioSesion, "inicioSesion");
+        add(panelPrincipal, "principal");
+        add(panelRegistro, "registro");
+        add(panelAnalisis, "analisis");
+        add(panelTorneosActivos, "torneosActivos");
+        add(panelResultados, "resultados");
+        add(panelRegistroJugador, "registroJugador");
+        add(panelRegistroEntrenador, "registroEntrenador");
+        add(panelRegistroEquipo, "registroEquipo");
+        add(panelRegistroAdministrador, "registroAdministrador");
+        add(panelRegistrarEmparejamiento, "registrarEmparejamiento");
+        add(panelRegistrarTorneo, "registrarTorneo");
+        add(panelDisponibilidadEquipos, "disponibilidadEquipos"); // Agregar el nuevo panel
 
-        // 5. Mostrar el panel de inicio de sesión al principio
         mostrarPanelInicioSesion();
     }
 
-    // Métodos para cambiar entre paneles usando CardLayout
     public void mostrarPanelInicioSesion() {
-        cardLayout.show(getContentPane(), "InicioSesion");
+        CardLayout cl = (CardLayout) getContentPane().getLayout();
+        cl.show(getContentPane(), "inicioSesion");
     }
 
     public void mostrarPanelPrincipal() {
-        cardLayout.show(getContentPane(), "Principal");
+        CardLayout cl = (CardLayout) getContentPane().getLayout();
+        cl.show(getContentPane(), "principal");
     }
 
     public void mostrarPanelRegistro() {
-        cardLayout.show(getContentPane(), "Registro");
-    }
-
-    public void mostrarPanelRegistroJugador() {
-        cardLayout.show(getContentPane(), "RegistroJugador");
-    }
-
-    public void mostrarPanelRegistroEntrenador() {
-        cardLayout.show(getContentPane(), "RegistroEntrenador");
-    }
-
-    public void mostrarPanelRegistroEquipo() {
-        cardLayout.show(getContentPane(), "RegistroEquipo");
-    }
-
-    public void mostrarPanelRegistroAdministrador() {
-        cardLayout.show(getContentPane(), "RegistroAdministrador");
-    }
-
-    public void mostrarPanelRegistrarEmparejamiento() {
-        cardLayout.show(getContentPane(), "RegistrarEmparejamiento");
-    }
-
-    public void mostrarPanelRegistrarTorneo() {
-        cardLayout.show(getContentPane(), "RegistrarTorneo");
+        CardLayout cl = (CardLayout) getContentPane().getLayout();
+        cl.show(getContentPane(), "registro");
     }
 
     public void mostrarPanelAnalisis() {
-        cardLayout.show(getContentPane(), "Analisis");
+        CardLayout cl = (CardLayout) getContentPane().getLayout();
+        cl.show(getContentPane(), "analisis");
     }
 
     public void mostrarPanelTorneosActivos() {
-        cardLayout.show(getContentPane(), "TorneosActivos");
+        CardLayout cl = (CardLayout) getContentPane().getLayout();
+        cl.show(getContentPane(), "torneosActivos");
     }
 
-    public void mostrarPanelResultados() { // Nuevo método
-        System.out.println("VentanaPrincipal: Método mostrarPanelResultados() llamado.");
-        cardLayout.show(getContentPane(), "Resultados");
-        System.out.println("VentanaPrincipal: CardLayout mostrando 'Resultados'.");
+    public void mostrarPanelResultados() {
+        CardLayout cl = (CardLayout) getContentPane().getLayout();
+        cl.show(getContentPane(), "resultados");
     }
 
-    // Getters para los paneles
+    public void mostrarPanelRegistroJugador() {
+        CardLayout cl = (CardLayout) getContentPane().getLayout();
+        cl.show(getContentPane(), "registroJugador");
+    }
+
+    public void mostrarPanelRegistroEntrenador() {
+        CardLayout cl = (CardLayout) getContentPane().getLayout();
+        cl.show(getContentPane(), "registroEntrenador");
+    }
+
+    public void mostrarPanelRegistroEquipo() {
+        CardLayout cl = (CardLayout) getContentPane().getLayout();
+        cl.show(getContentPane(), "registroEquipo");
+    }
+
+    public void mostrarPanelRegistroAdministrador() {
+        CardLayout cl = (CardLayout) getContentPane().getLayout();
+        cl.show(getContentPane(), "registroAdministrador");
+    }
+
+    public void mostrarPanelRegistrarEmparejamiento() {
+        CardLayout cl = (CardLayout) getContentPane().getLayout();
+        cl.show(getContentPane(), "registrarEmparejamiento");
+    }
+
+    public void mostrarPanelRegistrarTorneo() {
+        CardLayout cl = (CardLayout) getContentPane().getLayout();
+        cl.show(getContentPane(), "registrarTorneo");
+    }
+
+    public void mostrarPanelDisponibilidadEquipos() {
+        CardLayout cl = (CardLayout) getContentPane().getLayout();
+        cl.show(getContentPane(), "disponibilidadEquipos");
+    }
+
     public PanelInicioSesion getPanelInicioSesion() {
         return panelInicioSesion;
     }
@@ -122,6 +133,18 @@ public class VentanaPrincipal extends JFrame {
 
     public PanelRegistro getPanelRegistro() {
         return panelRegistro;
+    }
+
+    public PanelAnalisis getPanelAnalisis() {
+        return panelAnalisis;
+    }
+
+    public PanelTorneosActivos getPanelTorneosActivos() {
+        return panelTorneosActivos;
+    }
+
+    public PanelResultados getPanelResultados() {
+        return panelResultados;
     }
 
     public PanelRegistroJugador getPanelRegistroJugador() {
@@ -148,15 +171,7 @@ public class VentanaPrincipal extends JFrame {
         return panelRegistrarTorneo;
     }
 
-    public PanelAnalisis getPanelAnalisis() {
-        return panelAnalisis;
-    }
-
-    public PanelTorneosActivos getPanelTorneosActivos() {
-        return panelTorneosActivos;
-    }
-
-    public PanelResultados getPanelResultados() { // Nuevo getter
-        return panelResultados;
+    public PanelDisponibilidadEquipos getPanelDisponibilidadEquipos() {
+        return panelDisponibilidadEquipos;
     }
 }
