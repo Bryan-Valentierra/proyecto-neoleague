@@ -1,0 +1,78 @@
+<project name="NeoLeague" default="default" basedir=".">
+    <description>Builds, tests, and runs the project NeoLeague.</description>
+
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="build.classes.dir" value="${build.dir}/classes"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="lib.dir" value="lib"/>
+    <property name="poi-5.2.5.jar.file" value="poi-5.2.5.jar"/>
+    <property name="jxl.jar.file" value="jxl.jar"/>
+    <property name="main.class" value="co.edu.unbosque.view.VentanaPrincipal"/> <path id="jexcelapi.classpath">
+        <fileset dir="${lib.dir}">
+            <include name="${jxl.jar.file}"/>
+        </fileset>
+    </path>
+
+    <path id="poi.classpath">
+        <fileset dir="${lib.dir}">
+            <include name="${poi.jar.file}"/>
+        </fileset>
+    </path>
+
+    <path id="project.classpath">
+        <pathelement location="${build.classes.dir}"/>
+        <path refid="jexcelapi.classpath"/>
+        <path refid="poi.classpath"/>
+    </path>
+
+    <target name="clean" description="Limpia los directorios de construcción">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <target name="prepare" depends="clean" description="Crea los directorios de construcción">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${build.classes.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+        <mkdir dir="${lib.dir}"/> </target>
+
+    <target name="copy-libs" depends="prepare" description="Copia las dependencias a la carpeta lib">
+        <copy todir="${lib.dir}" failonerror="false">
+            <fileset dir="." includes="poi-5.2.5.jar"/>
+            <fileset dir="." includes="jxl.jar"/>
+            </copy>
+    </target>
+
+    <target name="compile" depends="prepare, copy-libs" description="Compila el código fuente">
+        <javac srcdir="${src.dir}"
+               destdir="${build.classes.dir}"
+               classpathref="project.classpath"
+               includeantruntime="false"
+               encoding="UTF-8"
+               includes="**/*.java"/>
+    </target>
+
+    <target name="jar" depends="compile" description="Crea el archivo JAR de distribución">
+        <jar destfile="${dist.dir}/${ant.project.name}.jar" basedir="${build.classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="${main.class}"/>
+                <attribute name="Class-Path" value="${toString:project.classpath}"/>
+            </manifest>
+            <zipgroupfileset dir="${lib.dir}" includes="*.jar"/>
+        </jar>
+    </target>
+
+    <target name="run" depends="jar" description="Ejecuta la aplicación">
+        <java jar="${dist.dir}/${ant.project.name}.jar" fork="true"/>
+    </target>
+
+    <target name="default" depends="run" description="Limpia, compila y ejecuta la aplicación"/>
+
+    <target name="debug-classpath" depends="prepare">
+        <echo message="Classpath de compilación:"/>
+        <pathconvert pathsep="${line.separator}" property="compile.classpath.list" refid="project.classpath"/>
+        <echo message="${compile.classpath.list}"/>
+    </target>
+
+</project>
